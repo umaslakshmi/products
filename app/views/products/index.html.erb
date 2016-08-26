@@ -1,0 +1,32 @@
+<h1>Listing products</h1>
+<a href="/comments">All comments</a>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Price</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @products.each do |product| %>
+			<tr>
+				<td><%= product.name %></td>
+				<td><%= product.description %></td>
+				<td>$<%= product.pricing %></td>
+				<td><%= product.category.name %></td>
+				<td>
+					<a href="/products/<%= product.id %>">Show</a> |
+					<a href="/products/<%= product.id %>/edit">Edit</a> |
+					<form method='post' action='/products/<%= product.id %>' style='display: inline'>
+						<input type='hidden' value='<%= form_authenticity_token %>' name='authenticity_token'>
+						<input type='hidden' name='_method' value='delete'>
+						<input type='submit' value='Destroy'>
+					</form>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<a href="/products/new">New Product</a>

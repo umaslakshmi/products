@@ -1,0 +1,24 @@
+<h1>Edit product</h1>
+<!-- <form method='post' action='/products/<%= @product.id %>'>
+	<input type='hidden' value='<%= form_authenticity_token %>' name='authenticity_token'>
+	<input type='hidden' name='_method' value='patch'>
+	<label>Name</label>
+	<input type='text' name='product[name]' value='<%= @product.name %>'>
+	<label>Description</label>
+	<input type='text' name='product[description]' value='<%= @product.description %>'>
+	<label>Price</label>
+	<input type='text' name='product[pricing]' value='<%= @product.pricing %>'>
+	<input type='submit' value='Update'> 
+</form> -->
+<%= simple_form_for @product do |f| %>
+<%= f.input :name, value: @product.name %>
+<%= f.input :description, value: @product.description %>
+<%= f.input :pricing, value: @product.pricing %>
+<%= f.input :category_id, :collection => @categories, value_method: :id, value: @product.category.name %>
+<%= f.button :submit %>
+<% end %>
+
+<p>
+	<a href="/products/<%= @product.id %>">Show</a> |
+	<a href="/products">Back</a>
+</p>
